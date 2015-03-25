@@ -33,15 +33,15 @@ $(function() {
 
 
 
-        it('has a url for each feed', function() {
+        it('have a non-empty url-string for each feed', function() {
             expect(allFeeds[e].url).toBeDefined();
+            expect(allFeeds[e].url).not.toEqual('');
         });
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a URL defined
-         * and that the URL is not empty.
-         */
 
-
+        it('have a non-empty name-string for each feed', function() {
+            expect(allFeeds[e].name).toBeDefined();
+            expect(allFeeds[e].name).not.toEqual('');
+        });
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
