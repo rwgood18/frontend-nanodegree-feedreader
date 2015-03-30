@@ -96,26 +96,25 @@ $(function() {
         });
     });
 
-    /* TODO: Write a new test suite named "New Feed Selection"
-
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
+        /* This test ensures that when a new feed is loaded
+         * by the loadFeed function, the content actually changes.
          */
     describe("New Feed Selection", function () {
         
-        var oldTitle = 0;
+        var oldTitle = allFeeds[0].name;
         var newTitle = 0;
 
         beforeEach(function(done) {
-            loadFeed(0, function () {
-                oldTitle = feedName;
-            });
+
             
             loadFeed(2, function () {
-                newTitle = feedName;
+                newTitle = allFeeds[2].name;
                 done();
             });
+        });
+
+        afterEach(function () {
+            loadFeed(0);
         });
 
         it("changes the content to that of the new feed", function (done) {
