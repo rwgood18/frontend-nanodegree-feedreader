@@ -4,7 +4,7 @@
 
 $(function() {
 
-    var len = allFeeds.length;
+    var LEN = allFeeds.length;
     /* These tests make sure that the allFeeds variable has been 
      * defined and that it is not empty.
      */
@@ -28,7 +28,7 @@ $(function() {
             });
         };
 
-        for (var i = 0; i < len; i++) {
+        for (var i = 0; i < LEN; i++) {
             testContent(i);
         }
 
@@ -105,7 +105,7 @@ $(function() {
                 });
             });
         };
-        for (var i = len - 1; i > -1; i--) {
+        for (var i = LEN - 1; i > -1; i--) {
             testContent(i);
         }
     });
