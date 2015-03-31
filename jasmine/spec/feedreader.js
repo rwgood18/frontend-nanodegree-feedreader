@@ -4,32 +4,33 @@
 
 $(function() {
 
+    var len = allFeeds.length;
     /* These tests make sure that the allFeeds variable has been 
      * defined and that it is not empty.
      */
 
     describe('RSS Feeds', function() {
-
-        var e = 0;
-
-        beforeEach(function() {
-            e++;
-        });
-
         it('are defined', function() {
-            expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).not.toBe(0);
-        });
+                expect(allFeeds).toBeDefined();
+                expect(allFeeds.length).not.toBe(0);
+            });
 
-        it('have a non-empty url-string for each feed', function() {
-            expect(allFeeds[e].url).toBeDefined();
-            expect(allFeeds[e].url).not.toEqual('');
-        });
+        testContent = function (e) { 
 
-        it('have a non-empty name-string for each feed', function() {
-            expect(allFeeds[e].name).toBeDefined();
-            expect(allFeeds[e].name).not.toEqual('');
-        });
+            it('have a non-empty url-string for feed number ' + e, function() {
+                expect(allFeeds[e].url).toBeDefined();
+                expect(allFeeds[e].url).not.toEqual('');
+            });
+
+            it('have a non-empty name-string for feed number ' + e, function() {
+                expect(allFeeds[e].name).toBeDefined();
+                expect(allFeeds[e].name).not.toEqual('');
+            });
+        };
+
+        for (var i = 0; i < len; i++) {
+            testContent(i);
+        }
 
     });
 
@@ -67,9 +68,7 @@ $(function() {
     describe("Initial Entries", function () {
 
         beforeEach(function(done) {
-            loadFeed(0, function () {
-                done();
-            });
+            loadFeed(0, done);
         });
 
         it("contain at least one feed", function (done) {
@@ -83,25 +82,32 @@ $(function() {
      */
 
     describe("New Feed Selection", function () {
-        
-        var oldTitle = allFeeds[0].name;
-        var newTitle;
+
+        var oldTitle,
+            newTitle,
+            len = allFeeds.length;
 
         testContent = function (num) {
+            describe("of feed " + num, function () {
 
-            it("changes the content to that of the selected feed", function(done) {
-                
-                var newTitle = allFeeds[num].name;
-                loadFeed(num);
-                console.log(oldTitle, newTitle);
-                expect(newTitle).not.toBe(oldTitle);
-                loadFeed(0);
-                done();
-            }); 
+                beforeEach(function (done) {
+                    oldTitle = $('.header-title').text();
+                    loadFeed(num, done);
+                });
+
+                it("changes the content to that of feed " + num, function (done) {
+                    newTitle = $('.header-title').text();
+                    expect(newTitle).toBeDefined();
+                    if (num > 0) {
+                        expect(newTitle).not.toBe(oldTitle);
+                    }
+                    done();
+                });
+            });
         };
-
-        for (i = 1; i < allFeeds.length; i++) {
+        for (var i = len - 1; i > -1; i--) {
             testContent(i);
         }
     });
+
 }());
