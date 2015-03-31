@@ -4,7 +4,7 @@
 
 $(function() {
 
-    var LEN = allFeeds.length;
+    var len = allFeeds.length;
     /* These tests make sure that the allFeeds variable has been 
      * defined and that it is not empty.
      */
@@ -28,7 +28,7 @@ $(function() {
             });
         };
 
-        for (var i = 0; i < LEN; i++) {
+        for (var i = 0; i < len; i++) {
             testContent(i);
         }
 
@@ -75,6 +75,21 @@ $(function() {
             expect(document.getElementsByClassName('feed')[0].hasChildNodes()).toBe(true);
             done();
         });
+
+
+        it("are not a duplicates of each other", function () {
+            for (var i = 0; i < len; i++) {
+                var url = allFeeds[i].url;
+                for (var x = 0; x < len; x++) {
+                    if (i != x) {
+                        expect(url).not.toBe(allFeeds[x].url);  
+                    }
+
+                }
+
+            }
+            
+        });
     });
 
     /* This test ensures that when a new feed is loaded
@@ -83,31 +98,29 @@ $(function() {
 
     describe("New Feed Selection", function () {
 
-        var oldTitle,
-            newTitle,
-            len = allFeeds.length;
+        var initialSnip = '',
+            newSnip;
 
         testContent = function (num) {
             describe("of feed " + num, function () {
 
                 beforeEach(function (done) {
-                    oldTitle = $('.header-title').text();
                     loadFeed(num, done);
                 });
 
                 it("changes the content to that of feed " + num, function (done) {
-                    newTitle = $('.header-title').text();
-                    expect(newTitle).toBeDefined();
+                    newSnip = $('.feed .entry p')[0].innerHTML;
+                    expect(newSnip).toBeDefined();
                     if (num > 0) {
-                        expect(newTitle).not.toBe(oldTitle);
+                        expect(newSnip).not.toBe(initialSnip);
                     }
                     done();
                 });
             });
         };
-        for (var i = LEN - 1; i > -1; i--) {
+
+        for (var i = len - 1; i > -1; i--) {
             testContent(i);
         }
     });
-
 }());

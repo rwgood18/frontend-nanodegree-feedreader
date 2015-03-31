@@ -33,7 +33,7 @@ function init() {
 }
 
 /* This function performs everything necessary to load a
- * feed using the Google Feed Reader API. It will then0
+ * feed using the Google Feed Reader API. It will then0http://blog.udacity.com/feeds/posts/default?alt=rss
  * perform all of the DOM operations required to display
  * feed entries on the page. Feeds are referenced by their
  * index position within the allFeeds array.
