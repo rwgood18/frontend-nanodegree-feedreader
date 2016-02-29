@@ -1,0 +1,7 @@
+http://jasmine.github.io/2.0/introduction.html
+
+http://stackoverflow.com/questions/13438202/using-jasmine-unit-testing-with-100-tests-of-the-same-type
+
+http://discussions.udacity.com/t/last-spec-in-feedreader-js/14575/2
+
+http://discussions.udacity.com/t/testing-menu-hide-unhiding/13629
